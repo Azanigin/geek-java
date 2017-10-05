@@ -1,5 +1,3 @@
-package J1T3;
-
 import java.util.Scanner;
 
 public class homeworkJ1T3 {
