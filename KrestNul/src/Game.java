@@ -4,10 +4,10 @@ import java.util.Scanner;
 public class Game {
 
     public static char [][] map;
-    public static final int SIZE = 3;
+    public static final int SIZE = 9;
     public static final int DOTS_TO_WIN = 3;
-    public static final char DOT_X = 'X';
-    public static final char DOT_O = 'O';
+    public static char DOT_X = 'X';
+    public static char DOT_O = 'O';
     public static final char DOT_EMPTY = '*';
     public static Random random = new Random();
 
@@ -17,27 +17,45 @@ public class Game {
     public static void main(String[] args) {
         mapINIT();
         printMAP();
-        for (int i=0; i<=SIZE+1; i++){
+        firstTurn();
+        while (true){
             humanTurn();
             printMAP();
             if (winCHECK(DOT_X)){
                 System.out.println("Победил человек");
                 break;
             }
-
-            if (i==SIZE+1){
+            if (mapFULL()){
                 System.out.println("НИЧЬЯ");
                 break;
             }
-
             iiTurn();
             printMAP();
             if (winCHECK(DOT_O)) {
                 System.out.println("Победил компьютер!");
                 break;
             }
+
+            if (mapFULL()){
+                System.out.println("НИЧЬЯ");
+                break;
+            }
         }
 
+    }
+
+    public static void firstTurn () { // Выбираем кто ходит первым.
+        int x;
+        char DOT_TEMP;
+        System.out.println("Кто ходит первым, человек - введите 1, компьютер - введите 0");
+        x = scanner.nextInt();
+        if (x==0) {
+            DOT_TEMP = DOT_X;
+            DOT_X = DOT_O;
+            DOT_O = DOT_TEMP;
+            iiTurn();
+            printMAP();
+        }
     }
 
     public static void  iiTurn(){
@@ -70,6 +88,15 @@ public class Game {
         if (map[y][x] == DOT_EMPTY) return true;
         return false;
 
+    }
+
+    public static boolean mapFULL () {
+        for (int i = 0; i <SIZE; i++) {
+            for (int j = 0; j <SIZE; j++) {
+                if (map[i][j]== DOT_EMPTY) return false;
+            }
+        }
+        return true;
     }
 
     public static boolean winCHECK (char symb) {
