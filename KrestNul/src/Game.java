@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class Game {
 
     public static char [][] map;
-    public static final int SIZE = 6;
-    public static final int DOTS_TO_WIN = 4;
+    public static final int SIZE = 3;
+    public static final int DOTS_TO_WIN = 3;
     public static final char DOT_X = 'X';
     public static final char DOT_O = 'O';
     public static final char DOT_EMPTY = '*';
@@ -17,13 +17,19 @@ public class Game {
     public static void main(String[] args) {
         mapINIT();
         printMAP();
-        while(true){
+        for (int i=0; i<=SIZE+1; i++){
             humanTurn();
             printMAP();
             if (winCHECK(DOT_X)){
                 System.out.println("Победил человек");
                 break;
             }
+
+            if (i==SIZE+1){
+                System.out.println("НИЧЬЯ");
+                break;
+            }
+
             iiTurn();
             printMAP();
             if (winCHECK(DOT_O)) {
@@ -31,12 +37,6 @@ public class Game {
                 break;
             }
         }
-
-
-        humanTurn();
-        printMAP();
-        iiTurn();
-        printMAP();
 
     }
 
